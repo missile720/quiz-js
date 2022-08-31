@@ -48,10 +48,15 @@ li {
   padding: 0.8em;
   background-color: white;
   border-radius: 3px;
-  box-shadow: 0 2px 0 rgba(0,0,0, 0.1);
+  box-shadow: 0 3px 0 rgba(0,0,0, 0.3);
 }
 
-
+li:hover{
+  background-color: #25677b;
+  color: white;
+  cursor: pointer;
+  box-shadow: none;
+}
 
 
 
