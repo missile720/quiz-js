@@ -1,13 +1,15 @@
 // 1. Create a multidimensional array to hold quiz questions and answers
 let questions = [
-    ["Question 1", "Answer 1", "Answer 2", "Answer 3", "Answer 4", "correct"],
-    ["Question 2", "Answer 5", "Answer 2", "Answer 3", "Answer 4", "correct"]
+    [1,"What is the meaning of life?", "Sleep", "Pizza", "Apple", "42", "42"],
+    [2,"What is 2+2?", "22", "Fish", "4", "ewww math", "4"]
 ];
 
 // 2. Store the number of questions answered correctly
 let correctAnswers = 0;
 //stores which question the user is on
 let currentQuestion = 1;
+//stores incorrect questions
+let incorrectQuestion = [];
 /* 
   3. Use a loop to cycle through each question
       - Present each question to the user
@@ -21,16 +23,62 @@ function questionLoop(list, number){
     element.innerHTML = "";
 
     element.innerHTML = `
-        <p>${list[number-1][0]}</p>
+        <h2>${list[number-1][1]}</h2>
+        <p>${list[number-1][0]}.</p>
         <ul>
-            <li>${list[number-1][1]}</li>
             <li>${list[number-1][2]}</li>
             <li>${list[number-1][3]}</li>
             <li>${list[number-1][4]}</li>
+            <li>${list[number-1][5]}</li>
         </ul>`;
+
+    //adds event listeners to the answers
+    let answers = document.querySelectorAll("li");
+
+    for(let i = 0; i < answers.length; i++){
+        answers[i].addEventListener("click", answerClick);
+    }
 }
 
 //inital run of quiz
 questionLoop(questions, currentQuestion);
+
+function answerClick(event){
+    //updates current question
+    currentQuestion++;
+
+    //grabs user answer
+    let answer = event.target.innerHTML;
+    
+    //grab question number
+    let number = parseInt(document.querySelector("p").innerHTML);
+
+    //checks to see if answer is correct
+    if(answer === questions[number-1][6]){
+        correctAnswers++;
+        console.log(correctAnswers);
+    }
+    else{
+        incorrectQuestion.push(document.querySelector("h2").innerHTML)
+        console.log
+    }
+
+    //removes event listeners to the answers
+    let answers = document.querySelectorAll("li");
+
+    for(let i = 0; i < answers.length; i++){
+        answers[i].removeEventListener("click", answerClick);
+    }
+
+    //checks to loop to next question or at end of questions posts results
+    if(number < questions.length){
+        questionLoop(questions, currentQuestion);
+    }
+    else{
+        results();
+    }
+}
+
+
 
 // 4. Display the number of correct answers to the user
