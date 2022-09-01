@@ -58,7 +58,26 @@ li:hover{
   box-shadow: none;
 }
 
+.result{
+  font-size: 40px;
+  font-weight: bolder;
+}
 
+button{
+  display: block;
+  margin: auto;
+  margin-top: 10px;
+  background-color: white;
+  color: #42b4d6;
+  border: none;
+  border-radius: 2px;
+  font-size: 25px;
+  box-shadow: 0 3px 0 rgba(0,0,0, 0.3);
+}
 
-
-
+button:hover{
+  background-color: #25677b;
+  color: white;
+  cursor: pointer;
+  box-shadow: none;
+}

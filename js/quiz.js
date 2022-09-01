@@ -18,10 +18,13 @@ let incorrectQuestion = [];
         answered questions increments by 1
 */
 function questionLoop(list, number){
+    //selects element via dom
     let element = document.querySelector(".question-list");
 
+    //makes sure the element is empty
     element.innerHTML = "";
 
+    //loads the question and answers
     element.innerHTML = `
         <h2>${list[number-1][1]}</h2>
         <p>${list[number-1][0]}.</p>
@@ -56,11 +59,10 @@ function answerClick(event){
     //checks to see if answer is correct
     if(answer === questions[number-1][6]){
         correctAnswers++;
-        console.log(correctAnswers);
     }
     else{
+        //pushes question answered wrong to an array
         incorrectQuestion.push(document.querySelector("h2").innerHTML)
-        console.log
     }
 
     //removes event listeners to the answers
@@ -70,7 +72,7 @@ function answerClick(event){
         answers[i].removeEventListener("click", answerClick);
     }
 
-    //checks to loop to next question or at end of questions posts results
+    //check to run function for next question or at end of questions posts results
     if(number < questions.length){
         questionLoop(questions, currentQuestion);
     }
@@ -79,6 +81,37 @@ function answerClick(event){
     }
 }
 
-
-
 // 4. Display the number of correct answers to the user
+function results(){
+    //selects element via dom
+    let element = document.querySelector(".question-list");
+
+    //makes sure the element is empty
+    element.innerHTML = "";
+
+    //loads the results
+    element.innerHTML = `
+    <h2>You answered ${correctAnswers}/${questions.length} correct</h2>
+    `;
+
+    if(correctAnswers === questions.length){
+        element.innerHTML += `
+        <p>Perfect score!</p>
+        `;
+    }
+    else{
+        element.innerHTML += `
+        <p class = "result">Questions answered wrong:</p>
+        `;
+        //loop through array containing questions
+        for(let i = 0; i < incorrectQuestion.length; i++){
+            element.innerHTML += `
+            <p>${incorrectQuestion[i]}</p>
+            `;
+        }
+
+        element.innerHTML += `
+        <button>Retry?</button>
+        `;
+    }
+}
