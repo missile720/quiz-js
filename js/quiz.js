@@ -1,7 +1,15 @@
 // 1. Create a multidimensional array to hold quiz questions and answers
 let questions = [
     [1,"What is the meaning of life?", "Sleep", "Pizza", "Apple", "42", "42"],
-    [2,"What is 2+2?", "22", "Fish", "4", "ewww math", "4"]
+    [2,"What is 2 + 2?", "22", "Fish", "4", "ewww math", "Fish"],
+    [3,"What came first the chicken or the egg?", "Chicken", "Egg", "Dinosaur", "ChickenEgg", "ChickenEgg"],
+    [4,"What is 3 + 3?", "8", "6", "upside down 9", "spider", "upside down 9"],
+    [5,"Can water be wet?", "Yes", "No", "Wet", "H20", "Wet"],
+    [6,"Apple or Android?", "Apple", "Pineapple","Android", "Landline", "Pineapple"],
+    [7,"Best console?", "Potato", "Xbox", "Switch", "PlayStation","Potato"],
+    [8,"How many questions did you get right so far?", "0", "5", "-10", "I don't know I haven't kept track...", "I don't know I haven't kept track..."],
+    [9,"Are these questions hard?", "Yes", "No", "What questions?", "Trick question", "What questions?"],
+    [10,"Last question: Who am I?", "Potato", "You", "Me", "Question", "Potato"]
 ];
 
 // 2. Store the number of questions answered correctly
@@ -109,9 +117,26 @@ function results(){
             <p>${incorrectQuestion[i]}</p>
             `;
         }
-
+        
+        //add button element
         element.innerHTML += `
         <button>Retry?</button>
         `;
+
+        //add event listener
+        document.querySelector("button").addEventListener("click", reset);
     }
+}
+
+function reset(){
+    //reset global variables
+    correctAnswers = 0;
+    currentQuestion = 1;
+    incorrectQuestion = [];
+
+    //remove event listener
+    document.querySelector("button").removeEventListener("click", reset);
+
+    //displays questions again from beginning
+    questionLoop(questions, currentQuestion);
 }
