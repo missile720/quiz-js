@@ -109,9 +109,26 @@ function results(){
             <p>${incorrectQuestion[i]}</p>
             `;
         }
-
+        
+        //add button element
         element.innerHTML += `
         <button>Retry?</button>
         `;
+
+        //add event listener
+        document.querySelector("button").addEventListener("click", reset);
     }
+}
+
+function reset(){
+    //reset global variables
+    correctAnswers = 0;
+    currentQuestion = 1;
+    incorrectQuestion = [];
+
+    //remove event listener
+    document.querySelector("button").removeEventListener("click", reset);
+
+    //displays questions again from beginning
+    questionLoop(questions, currentQuestion);
 }
